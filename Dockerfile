@@ -1,5 +1,5 @@
 FROM ubuntu:focal
-LABEL MAINTAINER='William Dizon <wdchromium@gmail.com>'
+LABEL MAINTAINER='Michaël COLL <mick.coll@gmail.com>'
 
 #update and accept all prompts
 ENV DEBIAN_FRONTEND=noninteractive
@@ -12,7 +12,6 @@ RUN apt-get update && apt-get install -y \
   curl \
   rlwrap \
   openjdk-17-jre-headless \
-  openjdk-8-jre-headless \
   ca-certificates-java \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
@@ -24,7 +23,7 @@ RUN curl -fsSL https://deb.nodesource.com/setup_14.x | bash - \
 #download mineos from github
 RUN mkdir /usr/games/minecraft \
   && cd /usr/games/minecraft \
-  && git clone --depth=1 https://github.com/hexparrot/mineos-node.git . \
+  && git clone --depth=1 https://github.com/michaelcoll/mineos-node.git . \
   && cp mineos.conf /etc/mineos.conf \
   && chmod +x webui.js mineos_console.js service.js
 

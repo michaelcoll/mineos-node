@@ -1,12 +1,12 @@
-REGISTRY_NAME := 
-REPOSITORY_NAME := hexparrot/
+REGISTRY_NAME :=
+REPOSITORY_NAME := michaelcoll/
 IMAGE_NAME := mineos
 TAG := :latest
 
 .PHONY: getcommitid
 all: build
 
-getcommitid: 
+getcommitid:
 	$(eval COMMITID = $(shell git log -1 --pretty=format:"%H"))
 
 build: getcommitid
