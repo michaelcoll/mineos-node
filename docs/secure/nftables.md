@@ -1,6 +1,6 @@
 # Server Hardening with nftables
 
-`nftables` is a powerful and precise firewall designed specifically to replace `iptables`. It is designed for greater human-readability and greater scaling. This document is to show how to configure `nftables` to conform to a default-deny access strategy: nothing goes through until expressly permitted. 
+`nftables` is a powerful and precise firewall designed specifically to replace `iptables`. It is designed for greater human-readability and greater scaling. This document is to show how to configure `nftables` to conform to a default-deny access strategy: nothing goes through until expressly permitted.
 
 It is possible that your system simultaneously has `iptables` and `nftables` installed, in a suboptimal configuration known as `iptables-legacy`. Though these two firewall suites are remarkably similar in function and syntax, where possible, keep only one firewall and uninstall `iptables` for both ipv4 and ipv6.
 
@@ -25,13 +25,13 @@ flush ruleset
 table inet pkt_filter {
     chain inbound {
         type filter hook input priority 0; policy drop;
-        
+
         ct state { related, established } accept
         tcp dport { 22 } ct state { new } accept
     }
     chain outbound {
         type filter hook output priority 0; policy drop;
-        
+
         ct state { related, established } accept
     }
 }
@@ -162,7 +162,7 @@ To open up any given port, follow this template:
                                     # values to match
                                             # verdict
         # alternate way to make this rule
-        # tcp dport 8443 ct state new accept 
+        # tcp dport 8443 ct state new accept
         ...
     }
 ```
@@ -205,6 +205,7 @@ The counters of `nftables` are much less tabular, but still informative. You can
 ## READING THE LOGS
 
 Our logging rules will produce lines that append to `/var/log/kern.log`:
+
 ```
 Jun 30 06:06:13 mineos-tkldev kernel: [ 8486.974964] tcp.in.dropped IN=eth0 OUT= MAC=00:16:3e:5e:6c:00:fe:ff:ff:ff:ff:ff:08:00 SRC=10.137.0.14 DST=10.137.0.16 LEN=52 TOS=0x00 PREC=0x00 TTL=63 ID=758 DF PROTO=TCP SPT=56296 DPT=8443 WINDOW=64240 RES=0x00 SYN URGP=0
 ```
@@ -218,6 +219,7 @@ There are resources online to help you understand each of these logged segments,
 ## GET RID OF TRASH-PACKETS
 
 Let's find some packets that just don't make sense to ever honor, and drop them immediately.
+
 ```
   chain inbound {
     ...

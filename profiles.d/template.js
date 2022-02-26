@@ -14,6 +14,6 @@ module.exports = function () {
     weight: 0,
     downloaded: false,
     filename: null, // minecraft_server.1.8.8.jar
-    version: null // 1.8.8,
-  }
-}
+    version: null, // 1.8.8,
+  };
+};

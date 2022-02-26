@@ -4,11 +4,11 @@ The MineOS user interface can be installed on FreeBSD systems using the `pkg` pa
 
 As written, these steps will install the webui with the following properties:
 
-* The nodejs scripts will be installed to `/usr/local/games/minecraft`
-* The user-data (servers, world config, etc.) will be in `/var/games/minecraft`
-* The webui will be accessible at `https://[ip-address]:8443` in your browser
-* It will run as `root`, and support an unlimited amount of users with one daemonized (background) process.
-* It will support an unlimited amount of servers (bound by your hardware)
+- The nodejs scripts will be installed to `/usr/local/games/minecraft`
+- The user-data (servers, world config, etc.) will be in `/var/games/minecraft`
+- The webui will be accessible at `https://[ip-address]:8443` in your browser
+- It will run as `root`, and support an unlimited amount of users with one daemonized (background) process.
+- It will support an unlimited amount of servers (bound by your hardware)
 
 # Installation steps
 
@@ -29,6 +29,7 @@ The MineOS web-ui requires a Linux-compatible /proc filesystem. To enable linpro
 ```
 
 ### ADDITIONAL DEPENDENCIES
+
 ```
 # pkg install -y rdiff-backup rsync gmake screen git python sysutils/py-supervisor www/node www/npm
 ```
@@ -44,6 +45,7 @@ Multiple appropriate Java editions exist, choose one to your liking:
 ```
 
 ## DOWNLOAD WEBUI FILES
+
 ```
 # mkdir -p /usr/local/games
 # cd /usr/local/games
@@ -55,12 +57,14 @@ Multiple appropriate Java editions exist, choose one to your liking:
 ```
 
 ### BUILD NODE DEPENDENCIES
+
 ```
 # echo "CXX=c++ npm install userid" | sh
 # echo "CXX=c++ npm install" | sh
 ```
 
 ## USE HTTPS FOR SECURE TRANSPORT
+
 ```
 # cd /usr/games/minecraft
 # ./generate-sslcert.sh
@@ -74,7 +78,9 @@ FreeBSD offers `rc.conf` for the init system.
 # cat /usr/local/games/minecraft/init/supervisor_conf.bsd >> /usr/local/etc/supervisord.conf
 # echo 'supervisord_enable="YES"' >> /etc/rc.conf
 ```
+
 Then, to manage the service:
+
 ```
 # supervisorctl status mineos
 # supervisorctl start mineos

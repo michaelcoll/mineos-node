@@ -22,13 +22,12 @@ exports.profile = {
       item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
       item['version'] = 0;
       item['release_version'] = '';
-      item['url'] = 'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar';
+      item['url'] =
+        'https://hub.spigotmc.org/jenkins/job/BuildTools/lastSuccessfulBuild/artifact/target/BuildTools.jar';
 
       p.push(item);
-
-    } catch (e) { }
+    } catch (e) {}
 
     callback(null, p);
-  } //end handler
-
-}
+  }, //end handler
+};

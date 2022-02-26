@@ -8,7 +8,7 @@ exports.profile = {
   request_args: {
     url: 'https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/maven-metadata.xml',
     json: false,
-    gzip: true
+    gzip: true,
   },
   handler: function (profile_dir, body, callback) {
     var p = [];
@@ -44,15 +44,17 @@ exports.profile = {
             item['weight'] = 5;
             item['filename'] = 'spongevanilla-{0}.jar'.format(item.version);
             item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-            item['url'] = 'https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/{0}/spongevanilla-{0}.jar'.format(item.version);
+            item['url'] =
+              'https://repo.spongepowered.org/maven/org/spongepowered/spongevanilla/{0}/spongevanilla-{0}.jar'.format(
+                item.version
+              );
             p.push(item);
           }
           callback(inner_err, p);
-        } catch (e) { }
-      })
-
-    } catch (e) { }
+        } catch (e) {}
+      });
+    } catch (e) {}
 
     callback(null, p);
-  } //end handler
-}
+  }, //end handler
+};

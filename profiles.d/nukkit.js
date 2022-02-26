@@ -39,12 +39,12 @@ exports.profile = {
       item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
       item['version'] = 0;
       item['release_version'] = '';
-      item['url'] = 'http://ci.mengcraft.com:8081/job/nukkit/lastSuccessfulBuild/artifact/target/nukkit-1.0-SNAPSHOT.jar';
+      item['url'] =
+        'http://ci.mengcraft.com:8081/job/nukkit/lastSuccessfulBuild/artifact/target/nukkit-1.0-SNAPSHOT.jar';
 
       p.push(item);
-    } catch (e) { }
+    } catch (e) {}
 
     callback(null, p);
-  } //end handler
-
-}
+  }, //end handler
+};

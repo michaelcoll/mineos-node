@@ -48,16 +48,16 @@ Following the same philosophy, once you execute the compound statement below--if
 ## REVIEW THE RULES
 
 ```
-# iptables -vnL  
+# iptables -vnL
 Chain INPUT (policy DROP 31 packets, 1848 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
   678 42849 ACCEPT     tcp  --  *      *       10.137.0.0/24        0.0.0.0/0            tcp dpt:22
 
 Chain FORWARD (policy DROP 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
 
 Chain OUTPUT (policy DROP 3 packets, 214 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
   400 46066 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
 
 # iptables-save > ~/iptables.safe
@@ -114,21 +114,21 @@ Let's look at the current rules so far. We use the parameters "-vnL" which gives
 ```
 # iptables -vnL
 Chain INPUT (policy DROP 2 packets, 104 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
   110  7468 ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
  3239  206K ACCEPT     tcp  --  *      *       10.137.0.0/24        0.0.0.0/0            tcp dpt:22
-    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0
 
 Chain FORWARD (policy DROP 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
 
 Chain OUTPUT (policy DROP 0 packets, 0 bytes)
- pkts bytes target     prot opt in     out     source               destination         
+ pkts bytes target     prot opt in     out     source               destination
  1886  196K ACCEPT     all  --  *      *       0.0.0.0/0            0.0.0.0/0            ctstate RELATED,ESTABLISHED
     0     0 ACCEPT     udp  --  *      *       0.0.0.0/0            0.0.0.0/0            udp dpt:53
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:80 /* allow outbound http */
     0     0 ACCEPT     tcp  --  *      *       0.0.0.0/0            0.0.0.0/0            tcp dpt:443 /* allow outbound https */
-    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0           
+    0     0 ACCEPT     icmp --  *      *       0.0.0.0/0            0.0.0.0/0
     0     0 ACCEPT     all  --  *      lo      0.0.0.0/0            0.0.0.0/0            /* Permit loopback traffic */
 ```
 
@@ -139,27 +139,29 @@ Chain OUTPUT (policy DROP 0 packets, 0 bytes)
 You can open a new terminal session that provides a real-time view of packets hitting your server. If you are trying to let a new service though, you'll see the packet show up first on the `INPUT` chain. Follow where the numbers increment to see where the packet ends up--trace the packet flow to the expected rule (and not incrementing DROP).
 
 If you want to remove a rule, do so with `--line-numbers`:
+
 ```
 # iptables --line-numbers --list
 Chain INPUT (policy DROP)
-num  target     prot opt source               destination         
+num  target     prot opt source               destination
 1    ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 2    ACCEPT     tcp  --  10.137.0.0/24        anywhere             tcp dpt:ssh
-3    ACCEPT     icmp --  anywhere             anywhere            
+3    ACCEPT     icmp --  anywhere             anywhere
 
 Chain FORWARD (policy DROP)
-num  target     prot opt source               destination         
+num  target     prot opt source               destination
 
 Chain OUTPUT (policy DROP)
-num  target     prot opt source               destination         
+num  target     prot opt source               destination
 1    ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED
 2    ACCEPT     udp  --  anywhere             anywhere             udp dpt:domain
 3    ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http /* allow outbound http */
 4    ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https /* allow outbound https */
-5    ACCEPT     icmp --  anywhere             anywhere            
+5    ACCEPT     icmp --  anywhere             anywhere
 6    ACCEPT     all  --  anywhere             anywhere             /* Permit loopback traffic */
 
 ```
+
 You can delete a rule with the syntax: `iptables -D [POLICY] [RULENO]`, for example `iptables -D OUTPUT 5` to remove the ICMP rule.
 
 ## DESIGNING NEW RULES TO ALLOW TRAFFIC
@@ -171,6 +173,7 @@ Writing a rule to allow inbound arbitrary port traffic is simple; the reverse tr
 ## GET RID OF TRASH-PACKETS
 
 Let's find some packets that just don't make sense to ever honor, and drop them immediately.
+
 ```
 # iptables -I INPUT 2 -m conntrack --ctstate INVALID -j DROP
 # iptables -I INPUT 2 -p tcp -m tcp --tcp-flags FIN,SYN FIN,SYN -m comment --comment "[malicious packet patterns]" -j DROP
@@ -189,4 +192,3 @@ Different distributions apply iptables in different ways, some use `iptables-per
 # Conclusion
 
 `iptables` provides an immense amount of control of packet flow. Creating good rules from the outset will lower the effort required to maintain a secured system. Be safe!
-

@@ -6,13 +6,13 @@ The most common keys are `RSA` keys, but others exist which are readily accepted
 
 # Generate a New Key
 
-The following command generates a `ed25519` key, similar to, but more modern (and recommended) than `RSA`.  You can generate an `RSA` key instead by simply replacing `ed25519` with `rsa`.
+The following command generates a `ed25519` key, similar to, but more modern (and recommended) than `RSA`. You can generate an `RSA` key instead by simply replacing `ed25519` with `rsa`.
 
 ```
 $ ssh-keygen -t ed25519 -C "for root@mineos" -f ~/.ssh/mineos
 Generating public/private ed25519 key pair.
-Enter passphrase (empty for no passphrase): 
-Enter same passphrase again: 
+Enter passphrase (empty for no passphrase):
+Enter same passphrase again:
 Your identification has been saved in /home/user/.ssh/mineos
 Your public key has been saved in /home/user/.ssh/mineos.pub
 The key fingerprint is:
@@ -20,14 +20,15 @@ SHA256:Maq2bflTz+vmKCRHcDcFM2o0IoXw41UnrYZSU4ZEju8 for root@mineos
 ...
 $
 ```
+
 In this example `-f ~/.ssh/mineos` is the filename of the private key to be generated. If this is omitted, it will default to `~/.ssh/id_ed25519`; this is often preferred, as it obviates the need to specify the `-i` identity file on subsequent steps.
 
 ## CONFIGURE THE HOST
 
-It is very possible your default installation of `sshd` already is allowing this kind of direct `root` login.  We can verify on the destination server:
+It is very possible your default installation of `sshd` already is allowing this kind of direct `root` login. We can verify on the destination server:
 
 ```
-# grep -b2 -n "Root" /etc/ssh/sshd_config 
+# grep -b2 -n "Root" /etc/ssh/sshd_config
 30-753-
 31-754-#LoginGraceTime 2m
 32:773:#PermitRootLogin prohibit-password
@@ -47,7 +48,7 @@ It is very possible your default installation of `sshd` already is allowing this
 
 Line 32 shows `#PermitRootLogin`, which is actually a comment and therefore has no effect. A standard convention of configuration files, however, is to indicate the default value if unspecified (as a comment would do)--this means that plaintext passwords are already prohibited for `root` login, but cryptographic keys are OK.
 
-Line 139 actually shows that for a user match of the user `root` connecting to this host, explicitly disallow plaintext passwords for `root` login.  Either of these `prohibit-password`s will work for this case, but the latter takes precedence.
+Line 139 actually shows that for a user match of the user `root` connecting to this host, explicitly disallow plaintext passwords for `root` login. Either of these `prohibit-password`s will work for this case, but the latter takes precedence.
 
 Restart the `sshd` daemon according to your distribution. Depending on your install, it could be `service sshd restart` or `systemctl restart sshd` (or others).
 
@@ -60,7 +61,7 @@ $ ssh-copy-id -i ~/.ssh/mineos root@10.137.0.12
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/user/.ssh/mineos.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-root@10.137.0.12's password: 
+root@10.137.0.12's password:
 Received disconnect from 10.137.0.12 port 22:2: Too many authentication failures
 Disconnected from 10.137.0.12 port 22
 ```
@@ -78,13 +79,14 @@ $ ssh-copy-id -i ~/.ssh/mineos mc@10.137.0.12
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/user/.ssh/mineos.pub"
 /usr/bin/ssh-copy-id: INFO: attempting to log in with the new key(s), to filter out any that are already installed
 /usr/bin/ssh-copy-id: INFO: 1 key(s) remain to be installed -- if you are prompted now it is to install the new keys
-mc@10.137.0.12's password: 
+mc@10.137.0.12's password:
 
 Number of key(s) added: 1
 
 Now try logging into the machine, with:   "ssh 'mc@10.137.0.12'"
 and check to make sure that only the key(s) you wanted were added.
 ```
+
 And now test it with the command:
 
 ```
@@ -96,7 +98,7 @@ Permissions 0644 for '/home/user/.ssh/mineos.pub' are too open.
 It is required that your private key files are NOT accessible by others.
 This private key will be ignored.
 Load key "/home/user/.ssh/mineos.pub": bad permissions
-mc@10.137.0.12's password: 
+mc@10.137.0.12's password:
 ```
 
 ## CORRECT KEY PERMISSIONS
@@ -106,15 +108,15 @@ Set the private and public key to read-only and access is granted. Remember, pas
 ```
 $ chmod 400 ~/.ssh/mineos*
 $ ssh -i ~/.ssh/mineos mc@10.137.0.12
-Enter passphrase for key '/home/user/.ssh/mineos': 
+Enter passphrase for key '/home/user/.ssh/mineos':
 Welcome to Mineos-tkldev, TurnKey GNU/Linux 14.0 / TurnKey 9.13 Stretch
 
 Linux mineos-tkldev 4.9.0-16-amd64 #1 SMP Debian 4.9.272-1 (2021-06-21) x86_64
 Last login: Fri Jul  2 19:34:59 2021 from 10.137.0.14
 
-mc@mineos-tkldev ~$ cat .ssh/authorized_keys 
+mc@mineos-tkldev ~$ cat .ssh/authorized_keys
 ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIEymEwH4hVASNVwxOhmDZF2dmhZPY/kfv8NV5X+rt/p1 for root@mineos
-mc@mineos-tkldev ~$ ll .ssh/authorized_keys 
+mc@mineos-tkldev ~$ ll .ssh/authorized_keys
 -rw-------. 1 mc mc 97 Jul  2 19:35 .ssh/authorized_keys
 ```
 
@@ -126,14 +128,14 @@ Switch to `root` on the destination machine:
 
 `# rsync -av --chown=root:root /home/mc/.ssh /root/`
 
-The reason this is a shortcut is it fully duplicates all authorized users for `mc` to `root`. Any *and all* keys that would permit `mc` access would now do the same for `root`. If this does not match your intended userset, edit `/root/.ssh/authorized_keys` to remove spurious entries.
+The reason this is a shortcut is it fully duplicates all authorized users for `mc` to `root`. Any _and all_ keys that would permit `mc` access would now do the same for `root`. If this does not match your intended userset, edit `/root/.ssh/authorized_keys` to remove spurious entries.
 
 ## VERIFY AUTHORIZED_KEYS PERMISSIONS
 
 `/.ssh` should be `700` and `authorized_keys` should be `400` or `600`.
 
 ```
-# ll .ssh/ 
+# ll .ssh/
 total 12
 drwx------.  2 root root 4096 Jul  2 19:35 ./
 drwx------. 10 root root 4096 Jul  2 20:00 ../
@@ -144,11 +146,11 @@ drwx------. 10 root root 4096 Jul  2 20:00 ../
 
 ```
 $ ssh -i ~/.ssh/mineos root@10.137.0.12
-Enter passphrase for key '/home/user/.ssh/mineos': 
+Enter passphrase for key '/home/user/.ssh/mineos':
 Welcome to Mineos-tkldev, TurnKey GNU/Linux 14.0 / TurnKey 9.13 Stretch
 
 Last login: Fri Jul  2 20:01:30 2021 from 10.137.0.14
-root@mineos-tkldev ~# 
+root@mineos-tkldev ~#
 ```
 
 It is attractive to omit the passphrase for truly instant, passwordless login. Establish your own threat model and decide what is best for your system and needs.
@@ -156,6 +158,7 @@ It is attractive to omit the passphrase for truly instant, passwordless login. E
 # Further Lockdown
 
 ## DISALLOW PLAINTEXT PASSWORDS
+
 If cryptographic keys completely replace your user passwords for system login, you can further harden your server by disallowing passwords:
 
 ```
@@ -163,7 +166,9 @@ If cryptographic keys completely replace your user passwords for system login, y
 #PasswordAuthentication yes
 #PermitEmptyPasswords no
 ```
+
 TO:
+
 ```
 # To disable tunneled clear text passwords, change to no here!
 PasswordAuthentication no
@@ -171,11 +176,12 @@ PasswordAuthentication no
 ```
 
 ## USING SSH-AGENTS
+
 As a convenience when using passphrases, you can use an SSH-AGENT to save you repetitive passphrase entry. Notice this login (and all subsequent logins until reboot) will automatically handle the passphrase prompt for you.
 
 ```
 # ssh-add ~/.ssh/mineos
-Enter passphrase for .ssh/mineos: 
+Enter passphrase for .ssh/mineos:
 Identity added: .ssh/mineos (for root@mineos)
 
 $ ssh -i ~/.ssh/mineos root@10.137.0.12
@@ -187,6 +193,7 @@ Last login: Fri Jul  2 20:06:55 2021 from 10.137.0.14
 ```
 
 ## USING SSH USER CONFIG
+
 Finally, you can simplify the connection process by making all attempts to a host always use a given identity file. Add the following content (adjust as necessary) to `~/.ssh/config`:
 
 ```
@@ -205,7 +212,7 @@ Welcome to Mineos-tkldev, TurnKey GNU/Linux 14.0 / TurnKey 9.13 Stretch
 Linux mineos-tkldev 4.9.0-16-amd64 #1 SMP Debian 4.9.272-1 (2021-06-21) x86_64
 You have new mail.
 Last login: Fri Jul  2 20:16:57 2021 from 10.137.0.14
-root@mineos-tkldev ~# 
+root@mineos-tkldev ~#
 ```
 
 # Conclusion

@@ -86,7 +86,6 @@ drwxrwxr-x. 4 1000 1000  255 Jun 24 09:54 117serv
 
 Take note of the `uid` (`1000`), which may also be listed as a username on the docker host, but has no meaning within the container. Any changes/additions to these files should be accompanied by `chown` to ensure consistency of ownership.
 
-
 ## Compare to files inside container
 
 Enter the container to browse the MineOS files:
@@ -109,4 +108,3 @@ Note the `uid` is zero (`0`) in the container (`root`-owned) and `1000` (or some
 ## Conclusion
 
 Docker handles all the hard stuff--including port forwarding--through the invocation command `docker run`. Docker instances only need be pulled and restarted to engage new updates from the upstream git repository. This makes for a very easy management of MineOS installations.
-

@@ -1,4 +1,3 @@
-
 // var async = require('async');
 var path = require('path');
 var fs = require('fs-extra');
@@ -23,11 +22,12 @@ exports.profile = {
       item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
       item['version'] = 0;
       item['release_version'] = '';
-      item['url'] = 'http://jenkins.imagicalmine.net:8080/job/ImagicalMine/lastStableBuild/artifact/releases/ImagicalMine.phar';
+      item['url'] =
+        'http://jenkins.imagicalmine.net:8080/job/ImagicalMine/lastStableBuild/artifact/releases/ImagicalMine.phar';
 
       p.push(item);
-    } catch (e) { }
+    } catch (e) {}
 
     callback(null, p);
-  } //end handler
-}
+  }, //end handler
+};

@@ -4,10 +4,10 @@ var fs = require('fs-extra');
 var profile = require('./template');
 
 exports.profile = {
-  name: "Mojang Official Minecraft Jars",
+  name: 'Mojang Official Minecraft Jars',
   request_args: {
     url: 'https://launchermeta.mojang.com/mc/game/version_manifest.json',
-    json: true
+    json: true,
   },
   handler: function (profile_dir, body, callback) {
     var request = require('request');
@@ -17,7 +17,7 @@ exports.profile = {
       async.waterfall([
         async.apply(request, obj.url),
         function (response, body, inner_cb) {
-          inner_cb(response.statusCode != 200, body)
+          inner_cb(response.statusCode != 200, body);
         },
         function (body, inner_cb) {
           try {
@@ -31,16 +31,17 @@ exports.profile = {
             if (p[idx]['id'] == obj['id'])
               try {
                 p[idx]['url'] = parsed['downloads']['server']['url'];
-              } catch (e) { }
+              } catch (e) {}
           inner_cb();
-        }
-      ])
+        },
+      ]);
       cb();
     }, 2);
 
     q.pause();
 
-    try {  // BEGIN PARSING LOGIC
+    try {
+      // BEGIN PARSING LOGIC
       for (var index in body.versions) {
         var item = new profile();
         var ref_obj = body.versions[index];
@@ -55,7 +56,9 @@ exports.profile = {
         item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
         item['version'] = ref_obj['id'];
         item['release_version'] = ref_obj['id'];
-        item['url'] = 'https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar'.format(item.version);
+        item['url'] = 'https://s3.amazonaws.com/Minecraft.Download/versions/{0}/minecraft_server.{0}.jar'.format(
+          item.version
+        );
 
         switch (ref_obj['type']) {
           case 'release':
@@ -75,14 +78,14 @@ exports.profile = {
         }
         //p.push(item);
       }
-    } catch (e) { }
+    } catch (e) {}
 
     q.resume();
     q.drain = function () {
       callback(null, p);
-    }
+    };
   }, //end handler
   postdownload: function (profile_dir, dest_filepath, callback) {
     callback();
-  }
-}
+  },
+};

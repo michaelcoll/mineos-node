@@ -1,7 +1,7 @@
 # MineOS
 
 MineOS is an entire ecosystem of web applications, shell scripts, wikis, and support forums
-designed to help Minecraft enthusiasts successfully host servers on *nix platforms.
+designed to help Minecraft enthusiasts successfully host servers on \*nix platforms.
 
 # Why Use MineOS?
 
@@ -16,7 +16,7 @@ MineOS is a web-based server front-end to centralize and simplify Minecraft sysa
 
 This is the primary interface for admins to download Minecraft server jars, create and configure multiple servers, start/stop instances, and create backups and initiate restores.
 
-It provides system health, disk and memory usage, and logging in real-time. The webui supports multiple, independent users, and uses standard Linux file permissions to keep data appropriately isolated. 
+It provides system health, disk and memory usage, and logging in real-time. The webui supports multiple, independent users, and uses standard Linux file permissions to keep data appropriately isolated.
 
 The webui has been tested on all major distributions and is confirmed to work on both Linux and BSD, x86_64 and ARM architectures.
 
@@ -24,7 +24,7 @@ The webui has been tested on all major distributions and is confirmed to work on
 
 MineOS Turnkey is the current flagship distribution of MineOS. Based on the proven Debian foundation, [Turnkey Linux](https://www.turnkeylinux.org/) is a perfect delivery system: a trimmed, yet infinitely extensible server platform. Respun with MineOS components pre-configured, MineOS Turnkey is the quickest way to get a _managed hosting platform_ up and running.
 
-The [MineOS Turnkey ISO](https://my.syncplicity.com/share/zkpd23mz0pod8ls/mineos-node_bullseye-x64) is approximately 720MB and supports x86_64 architectures only. 
+The [MineOS Turnkey ISO](https://my.syncplicity.com/share/zkpd23mz0pod8ls/mineos-node_bullseye-x64) is approximately 720MB and supports x86_64 architectures only.
 
 ## MineOS appliance (the other ways)
 

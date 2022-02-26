@@ -7,7 +7,7 @@ exports.profile = {
   name: 'BungeeCord',
   request_args: {
     url: 'http://ci.md-5.net/job/BungeeCord/rssAll',
-    json: false
+    json: false,
   },
   handler: function (profile_dir, body, callback) {
     var p = [];
@@ -31,15 +31,18 @@ exports.profile = {
             item['weight'] = 5;
             item['filename'] = 'BungeeCord-{0}.jar'.format(item.version);
             item['downloaded'] = fs.existsSync(path.join(profile_dir, item.id, item.filename));
-            item['url'] = 'http://ci.md-5.net/job/BungeeCord/{0}/artifact/bootstrap/target/BungeeCord.jar'.format(item.version);
+            item['url'] = 'http://ci.md-5.net/job/BungeeCord/{0}/artifact/bootstrap/target/BungeeCord.jar'.format(
+              item.version
+            );
             p.push(item);
           }
           callback(err || inner_err, p);
-        } catch (e) { }
-      })
-
-    } catch (e) { console.log(e) }
+        } catch (e) {}
+      });
+    } catch (e) {
+      console.log(e);
+    }
 
     callback(null, p);
-  } //end handler
-}
+  }, //end handler
+};

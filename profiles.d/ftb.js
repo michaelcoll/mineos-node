@@ -39,14 +39,14 @@
 //                         inner_cb(response.statusCode != 200, parsed)
 //                     },
 //                     function(details, inner_cb){
-//                         details["versions"].forEach( ver => { 
+//                         details["versions"].forEach( ver => {
 //                             ver.id
 //                         })
 //                     }
 //                 ])
 //               }
-//             }   
-//         ]) 
+//             }
+//         ])
 // })
 //       } catch (e) {}
 

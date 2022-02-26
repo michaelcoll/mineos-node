@@ -7,7 +7,7 @@ exports.profile = {
   name: 'Mianite',
   request_args: {
     url: 'http://mianite.us/repo?api=true',
-    json: true
+    json: true,
   },
   handler: function (profile_dir, body, callback) {
     var p = [];
@@ -37,19 +37,17 @@ exports.profile = {
             item['type'] = 'release';
             break;
           default:
-            if (ref_obj.version.match(/RC|A/))
-              item['type'] = 'snapshot';
-            else
-              item['type'] = 'release';
+            if (ref_obj.version.match(/RC|A/)) item['type'] = 'snapshot';
+            else item['type'] = 'release';
             break;
         }
 
         p.push(item);
       }
-
-    } catch (e) { console.log(e) }
+    } catch (e) {
+      console.log(e);
+    }
 
     callback(null, p);
-  } //end handler
-
-}
+  }, //end handler
+};

@@ -7,6 +7,7 @@ This walkthrough is currently in development; **use at your own risk**.
 ## Install Package Dependencies
 
 The following command is written for Debian, but equivalent packages exist for all distros.
+
 ```
 # apt install selinux-basics selinux-policy-default selinux-policy-src selinux-policydoc auditd locate
 ```
@@ -40,8 +41,9 @@ Creating default mineos.pp policy package
 rm tmp/mineos.mod.fc tmp/mineos.mod
 # semodule -i mineos.pp
 libsemanage.add_user: user system_u not in password file
-# 
+#
 ```
+
 ## Restore Contexts to Applicable Files
 
 The new rules now live in the kernel only apply to files with their respective types. Use `restorecon` to relabel files per our file context map: `mineos.fc`
@@ -86,6 +88,6 @@ alias pz='ps -auxZ'   # focuses on displaying contexts of processes
 # recently updated by "semodule -i mineos.pp"
 alias seon='setenforce 0; restorecon -R .;setenforce 1'
 alias seoff='setenforce 0; restorecon -R .'
-# while in the MineOS SELinux file directory, build the module and load it into memory 
+# while in the MineOS SELinux file directory, build the module and load it into memory
 alias mm='make -f /usr/share/selinux/devel/Makefile mineos.pp && semodule -i mineos.pp'
 ```

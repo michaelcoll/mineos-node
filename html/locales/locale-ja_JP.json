@@ -47,7 +47,7 @@
 
   "SERVER_NAME": "サーバー名",
   "CREATE_HELP": "文字と数字、およびアンダーバーのみ使用できます。",
-  "UNCONVENTIONAL_SERVER_TYPE": "このサーバーは、プロキシ/負荷分散 サーバーのような、従来とは異なるサーバーです。", 
+  "UNCONVENTIONAL_SERVER_TYPE": "このサーバーは、プロキシ/負荷分散 サーバーのような、従来とは異なるサーバーです。",
 
   "OFFICIAL_MOJANG_SERVER_JARS": "Mojang公式 サーバーJar",
   "AVAILABLE_SERVER_JARS": "利用可能なサーバー Jar/Pack",

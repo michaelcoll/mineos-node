@@ -17,15 +17,15 @@ When installing from Docker or unRAID, updates are accomplished through their re
 
 Be sure to look out for any errors produced to the screen from `npm install`--unfixed errors with modules (e.g., `posix` or `userid`) will leave the webui in an unusable state.
 
-Finally, *restart the webui process*.  This differs on installation-to-installation, but can be accomplished in the following ways, listed in descending preferential order:
+Finally, _restart the webui process_. This differs on installation-to-installation, but can be accomplished in the following ways, listed in descending preferential order:
 
-1) `# supervisorctl restart mineos`   # used on MineOS Turnkey, and all install-on-distro deployments
-2) `# service mineos restart`         # used by `systemd`
-3) reboot the server
+1. `# supervisorctl restart mineos` # used on MineOS Turnkey, and all install-on-distro deployments
+2. `# service mineos restart` # used by `systemd`
+3. reboot the server
 
 ### RESET THE WEBUI
 
-Resetting the webui is different than updating--but is also not frequently needed. If you are manually changing any of the source code, or simply want to carpet-bomb to the repo to its base state, follow these steps: 
+Resetting the webui is different than updating--but is also not frequently needed. If you are manually changing any of the source code, or simply want to carpet-bomb to the repo to its base state, follow these steps:
 
 ```
 # cd /usr/games/minecraft
@@ -63,7 +63,7 @@ npm ERR! errno ENOENT
 npm ERR! syscall spawn
 npm ERR! posix@4.1.2 install: `node-gyp rebuild`
 npm ERR! spawn ENOENT
-npm ERR! 
+npm ERR!
 npm ERR! Failed at the posix@4.1.2 install script.
 npm ERR! This is probably not a problem with npm. There is likely additional logging output above.
 ```
@@ -122,7 +122,7 @@ v8.17.0
 In the event you have multiple versions of node present, you will want to update the init files in your `/etc/` filetree.
 
 ```
-# cat /etc/supervisor/conf.d/mineos.conf 
+# cat /etc/supervisor/conf.d/mineos.conf
 [program:mineos]
 command=/usr/bin/node webui.js
 ...
