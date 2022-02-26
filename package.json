@@ -83,7 +83,7 @@
     "urllib": "^2.34.1",
     "userid": "1.0.0-beta.9",
     "uuid": "3.0.x",
-    "which": "1.2.x",
+    "which": "2.0.x",
     "whoami": "0.0.x",
     "winston": "1.1.x",
     "xml2js": "^0.4.19"
