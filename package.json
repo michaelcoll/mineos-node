@@ -62,7 +62,7 @@
     "node-addon-api": "3.1.0",
     "node-getopt": "^0.3.2",
     "node-uuid": "1.4.x",
-    "object-hash": "1.1.x",
+    "object-hash": "3.0.x",
     "passport": "0.3.x",
     "passport-local": "1.0.x",
     "passport.socketio": "3.6.x",
