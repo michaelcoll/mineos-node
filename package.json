@@ -72,7 +72,7 @@
     "request": "^2.88.2",
     "request-progress": "3.0.x",
     "rsync": "0.6.x",
-    "sha512crypt-node": "0.1.x",
+    "sha512crypt-node": "1.0.x",
     "socket.io": "4.4.x",
     "strftime": "0.10.x",
     "tail": "2.2.4",
