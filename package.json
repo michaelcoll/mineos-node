@@ -54,7 +54,7 @@
     "introspect": "0.0.x",
     "lazylines": "1.0.0",
     "line-by-line": "^0.1.6",
-    "mcquery": "0.2.x",
+    "mcquery": "1.0.x",
     "method-override": "^2.3.10",
     "moment": "2.29.x",
     "moment-duration-format": "1.3.x",
