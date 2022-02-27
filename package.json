@@ -75,7 +75,7 @@
     "sha512crypt-node": "0.1.x",
     "socket.io": "2.4.x",
     "strftime": "0.10.x",
-    "tail": "1.2.1",
+    "tail": "2.2.4",
     "tar": "^6.1.11",
     "tarball-extract": "0.0.6",
     "tmp": "0.0.33",
