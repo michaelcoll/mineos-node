@@ -65,7 +65,7 @@
     "object-hash": "3.0.x",
     "passport": "0.3.x",
     "passport-local": "1.0.x",
-    "passport.socketio": "3.6.x",
+    "passport.socketio": "3.7.x",
     "posix": "^4.2.0",
     "procfs-stats": "1.0.x",
     "q": "1.4.x",
