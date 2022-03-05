@@ -63,7 +63,7 @@
     "node-getopt": "^0.3.2",
     "node-uuid": "1.4.x",
     "object-hash": "3.0.x",
-    "passport": "0.3.x",
+    "passport": "0.5.x",
     "passport-local": "1.0.x",
     "passport.socketio": "3.7.x",
     "posix": "^4.2.0",
