@@ -91,6 +91,6 @@
   "devDependencies": {
     "lint-staged": "12.3.5",
     "nodeunit": "^0.11.3",
-    "prettier": "2.5.1"
+    "prettier": "2.6.2"
   }
 }
