@@ -89,7 +89,7 @@
     "xml2js": "^0.4.23"
   },
   "devDependencies": {
-    "lint-staged": "12.3.5",
+    "lint-staged": "12.3.8",
     "nodeunit": "^0.11.3",
     "prettier": "2.5.1"
   }
